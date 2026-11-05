@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0d12">
+  <title>Street Poker</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♠</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Accueil -->
+  <main id="home" class="screen">
+    <h1 class="logo">STREET<span>POKER</span></h1>
+    <p class="tag">Texas Hold'em entre potes · jetons fictifs, zéro argent réel</p>
+    <label class="field">Ton pseudo<input id="name" maxlength="16" placeholder="ex : Kaïs" autocomplete="nickname"></label>
+
+    <section class="panel">
+      <h2>Jouer entre amis</h2>
+      <button id="btnCreate" class="btn neon">Créer une table</button>
+      <div class="row">
+        <input id="code" maxlength="4" placeholder="CODE" autocapitalize="characters">
+        <button id="btnJoin" class="btn">Rejoindre</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Solo contre l'IA</h2>
+      <div class="row">
+        <select id="level" aria-label="Difficulté">
+          <option value="facile">Facile</option>
+          <option value="moyen" selected>Moyen</option>
+          <option value="difficile">Difficile</option>
+        </select>
+        <select id="bots" aria-label="Nombre d'adversaires">
+          <option value="1">1 adversaire</option><option value="2">2 adversaires</option>
+          <option value="3" selected>3 adversaires</option><option value="5">5 adversaires</option>
+          <option value="7">7 adversaires</option>
+        </select>
+      </div>
+      <button id="btnSolo" class="btn neon alt">Jouer en solo</button>
+    </section>
+    <p id="err" class="err" role="alert"></p>
+  </main>
+
+  <!-- Table -->
+  <main id="game" class="screen hidden">
+    <header class="top">
+      <button id="btnLeave" class="btn small ghost">← Quitter</button>
+      <div class="tcode">Table <b id="tcode"></b></div>
+      <button id="btnShare" class="btn small">Partager</button>
+    </header>
+
+    <div class="felt-wrap">
+      <div id="felt" class="felt">
+        <div class="center">
+          <div id="board" class="board"></div>
+          <div id="pot" class="pot"></div>
+          <div id="info" class="info"></div>
+        </div>
+        <div id="seats"></div>
+      </div>
+    </div>
+
+    <div id="lobby" class="lobby hidden">
+      <p>Partage le code <b id="lcode"></b> ou le lien à tes amis (2 à 8 joueurs).</p>
+      <div id="hostTools" class="row">
+        <select id="botLevel" aria-label="Difficulté de l'IA">
+          <option value="facile">IA facile</option><option value="moyen" selected>IA moyenne</option><option value="difficile">IA difficile</option>
+        </select>
+        <button id="btnAddBot" class="btn">+ IA</button>
+        <button id="btnStart" class="btn neon">Lancer</button>
+      </div>
+      <p id="waitHost" class="muted">En attente que l'hôte lance la partie…</p>
+    </div>
+
+    <div id="actions" class="actions">
+      <div id="timer" class="timer"><i></i></div>
+      <div id="raiseBox" class="raise">
+        <div class="presets">
+          <button data-p="0.5" class="btn small">½ pot</button>
+          <button data-p="1" class="btn small">Pot</button>
+          <button data-p="all" class="btn small">Tapis</button>
+        </div>
+        <input id="slider" type="range" aria-label="Montant de la relance">
+      </div>
+      <div class="buttons">
+        <button id="aFold" class="btn red">Se coucher</button>
+        <button id="aCall" class="btn"></button>
+        <button id="aRaise" class="btn neon"></button>
+      </div>
+    </div>
+    <button id="btnRebuy" class="btn neon hidden rebuy">Recave (1000 jetons fictifs)</button>
+    <ul id="log" class="log"></ul>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "street-poker",
+  "version": "1.0.0",
+  "description": "Street Poker — Texas Hold'em entre amis, jetons fictifs",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "socket.io": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
